@@ -22,6 +22,7 @@ class MyBot(discord.Client):
         self.switch = {
             'ping': self.pong,
             'c_create': self.create_channel,
+            'c_delete': self.delete_channel
         }
 
         print('Logged on as', self.user)
@@ -29,17 +30,26 @@ class MyBot(discord.Client):
     async def pong(self, ctx, msg):
         await ctx.channel.send('pong')
 
+    async def delete_channel(self, ctx, msg):
+        if len(msg) != 2:
+            return await ctx.channel.send('[c_create] Create a new channel\n\nUSAGE:\n\t::c_create v(ocal)/t(ext) name')
+        channel_does_exist = discord.utils.get(discord.guild.channels, name=msg[2])
+        if channel_does_exist != None:
+            await channel_does_exist.delete()
+            print(f'Channel {msg[2]} deleted by @{ctx.author}.')
+            return await ctx.channel.send(f'Channel {msg[2]} created by @{ctx.author} ! Have fun !')
+        return await ctx.channel.send(f'The channel \'{msg[2]}\' does not exist !')
+
     async def create_channel(self, ctx, msg):
         if len(msg) != 3:
-            return await ctx.channel.send('[::c_create] Create a new channel\nUSAGE: ::c_create v(ocal)/t(ext) name')
+            return await ctx.channel.send('[c_create] Create a new channel\n\nUSAGE:\n\t::c_create v(ocal)/t(ext) name')
+        msg[1] = msg[1].lower()
         if msg[1] == 'v' or msg[1] == 'vocal':
-            #await self.guilds.create_vocal_channel(msg[2])
-            await guild.create_vocal_channel(msg[2])
+            await ctx.guild.create_voice_channel(name=msg[2])
         elif msg[1] == 't' or msg[1] == 'text':
-            #await self.guilds.create_text_channel(msg[2])
-            await guild.create_text_channel(msg[2])
-        print(f'Channel {msg[2]} created by {ctx.author}.')
-        return await ctx.channel.send(f'Channel {msg[2]} created by {ctx.author} ! Have fun !')
+            await ctx.guild.create_text_channel(name=msg[2])
+        print(f'Channel {msg[2]} created by @{ctx.author}.')
+        return await ctx.channel.send(f'Channel {msg[2]} created by @{ctx.author} ! Have fun !')
 
     async def on_message(self, message):
         if message.author == self.user or message.author.bot:
