@@ -32,8 +32,9 @@ class MyBot(discord.Client):
 
     async def delete_channel(self, ctx, msg):
         if len(msg) != 2:
-            return await ctx.channel.send('[c_create] Create a new channel\n\nUSAGE:\n\t::c_create v(ocal)/t(ext) name')
-        channel_does_exist = discord.utils.get(discord.guild.channels, name=msg[2])
+            return await ctx.channel.send('[c_delete] Delete a channel\n\nUSAGE:\n\t::c_delete name')
+        #channel_does_exist = discord.utils.get(ctx.guild.channels, name=msg[2])
+        channel_does_exist = discord.utils.find(lambda m: m.name == msg[2], ctx.guild.channels)
         if channel_does_exist != None:
             await channel_does_exist.delete()
             print(f'Channel {msg[2]} deleted by @{ctx.author}.')
