@@ -59,7 +59,8 @@ class HelpCog(commands.Cog, name="help command"):
 			**{self.bot.command_prefix}ban <tag>** : ban <tag> user (buy my silence now)
 			**{self.bot.command_prefix}kick <member>** : kick <tag> user (I only take bitcoins)
 			**{self.bot.command_prefix}hello there** : Only the chosen ones shall know''', inline=False)
-			await ctx.channel.send(embed=embed)
+			await ctx.channel.purge(limit=1)
+			return await ctx.author.send(embed=embed)
 
 def setup(bot:commands.Bot):
 	bot.remove_command("help")

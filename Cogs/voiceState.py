@@ -6,7 +6,7 @@ import time
 class voiceStateCog(commands.Cog, name="voice command"):
 	def __init__(self, bot:commands.bot):
 		self.bot = bot
-        
+
 	@commands.command(name = "voice",
 					usage="",
 					description = "voice x amount of messages in chat.")
