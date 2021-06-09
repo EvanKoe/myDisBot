@@ -6,7 +6,7 @@ import time
 class TemplateCog(commands.Cog, name="template command"):
 	def __init__(self, bot:commands.bot):
 		self.bot = bot
-        
+
 	@commands.command(name = "template",
 					usage="",
 					description = "Creates a new template for the server.")

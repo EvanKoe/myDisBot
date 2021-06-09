@@ -23,18 +23,14 @@ class OnCommandErrorCog(commands.Cog, name="on command error"):
 			else:
 				await ctx.send(f'This command has a cooldown, be sure to wait for {error.retry_after:.2f} second(s)')
 		elif isinstance(error, CommandNotFound):
-			await ctx.send('*Error: Command Not Found*')
-			return
+			return await ctx.send('*Error: invalid command. Try typing ::help to get help*')
 		elif isinstance(error, MissingPermissions):
- 			#await ctx.send(error.text)
-			await ctx.send('*Error: Missing Permissions*')
+			return await ctx.send('*Error: Missing Permissions*')
 		elif isinstance(error, CheckFailure):
-			#await ctx.send(error.original.text)
-			await ctx.send('*Error: Check Failure*')
-		elif isinstance(error, commands.MissingRequiredArgument):
-			await ctx.send('*Error: Missing Argument*')
-		else:
-			print(error)
+			return await ctx.send('*Error: Check Failure*')
+		#elif isinstance(error, commands.MissingRequiredArgument):
+		#	return await ctx.send('*Error: Missing Argument*')
+		return print(error)
 
 def setup(bot):
 	bot.add_cog(OnCommandErrorCog(bot))

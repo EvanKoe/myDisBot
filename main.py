@@ -35,8 +35,6 @@ async def on_ready():
 	status_online = discord.Status.online
 	status_idle = discord.Status.idle
 	status_dnd = discord.Status.do_not_disturb
-	#await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name =f"{bot.command_prefix}help"))
-	#await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.CustomActivity, name='Coding your ass off'))
 	await bot.change_presence(status = status_dnd, activity=activity_watching)
 
 bot.run(token)

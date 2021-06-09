@@ -20,7 +20,7 @@ class HelpCog(commands.Cog, name="help command"):
 			for i in self.bot.commands:
 				if i.name == commandName.lower():
 					commandName2 = i
-					break 
+					break
 				else:
 					for j in i.aliases:
 						if j == commandName.lower():
@@ -28,10 +28,10 @@ class HelpCog(commands.Cog, name="help command"):
 							stop = True
 							break
 						if stop is True:
-							break 
+							break
 
 			if commandName2 is None:
-				await ctx.channel.send("No command found!")   
+				await ctx.channel.send("No command found!")
 			else:
 				embed = discord.Embed(title=f"**{commandName2.name.upper()} COMMAND :**", description="", color=randint(0, 0xffffff))
 				embed.set_thumbnail(url=f'{self.bot.user.avatar_url}')
@@ -48,20 +48,18 @@ class HelpCog(commands.Cog, name="help command"):
 					commandName2.usage = ""
 				embed.add_field(name=f"**USAGE :**", value=f"{self.bot.command_prefix}{commandName2.name} {commandName2.usage}", inline=False)
 				embed.add_field(name=f"**DESCRIPTION :**", value=f"{commandName2.description}", inline=False)
-				await ctx.channel.send(embed=embed)             
+				await ctx.channel.send(embed=embed)
 		else:
 			embed = discord.Embed(title=f"__**Help page of {self.bot.user.name}**__", description=f"**{self.bot.command_prefix}help (command)** : Display the help list or the help data for a specific command.", color=randint(0, 0xffffff))
 			embed.set_thumbnail(url=f'{self.bot.user.avatar_url}')
-			# embed.add_field(name=f"__COMMANDS :__", value=f"**{self.bot.command_prefix}command <parameters>** : Command description.", inline=False)
 			embed.add_field(name=f"__COMMANDS :__", value=f'''**{self.bot.command_prefix}command <parameters>** : Command description.
 			**{self.bot.command_prefix}ping** : Display the bot's ping
-			**{self.bot.command_prefix}kick <member>** : Kick the pinged member
-			**{self.bot.command_prefix}ban <member>** : Ban the pinged member
+			**{self.bot.command_prefix}createText <name>** : create text channel named <name>
+			**{self.bot.command_prefix}createVocal <name>** : create vocal channel named <name>
+			**{self.bot.command_prefix}ban <tag>** : ban <tag> user (buy my silence now)
+			**{self.bot.command_prefix}kick <member>** : kick <tag> user (I only take bitcoins)
 			**{self.bot.command_prefix}hello there** : Only the chosen ones shall know''', inline=False)
-			# embed.add_field(name="Field 2 Title", value="It is inline with Field 3", inline=True)
-			# embed.add_field(name="Field 3 Title", value="It is inline with Field 2", inline=True)
 			await ctx.channel.send(embed=embed)
-	
 
 def setup(bot:commands.Bot):
 	bot.remove_command("help")
