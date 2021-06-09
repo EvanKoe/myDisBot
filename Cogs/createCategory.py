@@ -16,7 +16,7 @@ class CategoryCreateCog(commands.Cog, name="createCategory command"):
 	@commands.cooldown(1, 2, commands.BucketType.member)
 	async def createCategory(self, ctx, cat_name:str):
 		cat_name = cat_name.replace('-', ' ')
-		await ctx.guild.create_category(name=cat_name)
+		await ctx.guild.create_category(name=cat_name.upper())
 		await ctx.send(f'*Category {cat_name} created by {ctx.author.mention}! Enjoy!*')
 
 def setup(bot:commands.Bot):

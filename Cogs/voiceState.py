@@ -21,7 +21,7 @@ class voiceStateCog(commands.Cog, name="voice command"):
 		elif arg == 'unmute':
 			await member.edit(mute=False)
 			await ctx.send(f'{member.mention} has been un-muted by {ctx.author.mention}')
-		elif arg== 'undeaf':
+		elif arg == 'undeaf':
 			await member.edit(deafen=False)
 			await ctx.send(f'{member.mention} has been un-deafened by {ctx.author.mention}')
 
