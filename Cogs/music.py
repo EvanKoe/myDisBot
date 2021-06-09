@@ -8,16 +8,14 @@ class MusicCog(commands.Cog, name="music command"):
 		self.bot = bot
 
 	@commands.command(name = "music play",
-        usage="",
-        description = "Let HUB play the music for you !"
-    )
+					usage="",
+					description = "Let HUB play the music for you !")
 	@commands.cooldown(1, 2, commands.BucketType.member)
 	async def play(self, ctx):
-		await self.bot.join_voice_channel(ctx.message.author.voice.voice_channel)
-        args = ctx.message.content.split(" ")
-        betterargs = " ".join(args[1:])
-        player = await voice.create_ytdl_player('https://www.youtube.com/watch?v=' + betterargs)
-        player.start()
+        voice_client: discord.VoiceClient = discord.utils.get(self.voice_clients, guild=guild)
+        audio_source = discord.e('vuvuzela.mp3')
+        if not voice_client.is_playing():
+            voice_client.play(audio_source, after=None)
 
 def setup(bot:commands.Bot):
 	bot.add_cog(MusicCog(bot))
