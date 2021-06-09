@@ -15,8 +15,11 @@ class KickCog(commands.Cog, name="kick command"):
 	async def kick(self, ctx, member:discord.Member=None, *, reason=None):
 		if member == None:
 			return await ctx.send('*I should have kicked you, traitor !\nUSAGE:\n\t::kick mention#0000*')
+		if reason == None:
+			reason = "You were bad"
+		await member.send(f'You have been kicked from {ctx.guild.name} for the following reason :\n\t{reason}')
 		await member.kick(reason=reason)
-		return await ctx.send(f'*{member} kicked by {ctx.message.author}*')
+		return await ctx.send(f'*{member.mention} kicked by {ctx.message.author.mention}*')
 
 def setup(bot:commands.Bot):
 	bot.add_cog(KickCog(bot))
