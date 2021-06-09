@@ -7,7 +7,6 @@ import time
 class CategoryCreateCog(commands.Cog, name="createCategory command"):
 	def __init__(self, bot:commands.bot):
 		self.bot = bot
-        
 	@commands.command(name = "createCategory",
 					usage="",
 					description = '''Create a new category.

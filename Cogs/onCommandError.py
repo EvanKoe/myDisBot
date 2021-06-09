@@ -7,7 +7,7 @@ import time
 class OnCommandErrorCog(commands.Cog, name="on command error"):
 	def __init__(self, bot:commands.Bot):
 		self.bot = bot
-        
+
 	@commands.Cog.listener()
 	async def on_command_error(self, ctx:commands.Context, error:commands.CommandError):
 		if isinstance(error, commands.CommandOnCooldown):
@@ -34,7 +34,7 @@ class OnCommandErrorCog(commands.Cog, name="on command error"):
 		elif isinstance(error, commands.MissingRequiredArgument):
 			await ctx.send('*Error: Missing Argument*')
 		else:
-			print(error) 
+			print(error)
 
 def setup(bot):
 	bot.add_cog(OnCommandErrorCog(bot))
